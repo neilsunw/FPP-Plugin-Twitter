@@ -1,0 +1,24 @@
+FPP-Plugin-Twitter
+Test OAuth
+Primary tabs
+Details
+Settings
+Keys and Access Tokens(active tab)
+Permissions
+Application Settings
+Keep the "Consumer Secret" a secret. This key should never be human-readable in your application.
+Consumer Key (API Key)	aAIqeAgMHCTTtMHjsYeQ72Wz2
+Consumer Secret (API Secret)	pZ3UFtDCLu29InsmWTYtM349JI5Tc3iK9gxGxRoMQOFrRLlQPS
+Access Level	Read-only (modify app permissions)
+Owner	LightsOnHudson
+Owner ID	2961875552
+Application Actions
+Regenerate Consumer Key and SecretChange App Permissions
+Your Access Token
+This access token can be used to make API requests on your own account's behalf. Do not share your access token secret with anyone.
+Access Token	2961875552-cmjnzxvV4UYPSKOE8lvVMGbr1RImHjLLvNMcKzn
+Access Token Secret	2YNcxO1zu3ZJgIcv1tiTmK2d2YuRLa0VlRZQKaKSplnNW
+Access Level	Read-only
+Owner	LightsOnHudson
+Owner ID	2961875552
+
