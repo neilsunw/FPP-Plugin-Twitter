@@ -2,15 +2,35 @@
 
 //$DEBUG=true;
 
-include_once "/opt/fpp/www/common.php";
-include_once "functions.inc.php";
 
+
+include_once 'functions.inc.php';
+include_once 'commonFunctions.inc.php';
 
 $pluginName = "Twitter";
+
+$myPid = getmypid();
+
+$gitURL = "https://github.com/LightsOnHudson/FPP-Plugin-Twitter.git";
+
+
+$pluginUpdateFile = $settings['pluginDirectory']."/".$pluginName."/"."pluginUpdate.inc";
+
+
 
 
 $logFile = $settings['logDirectory']."/".$pluginName.".log";
 
+
+logEntry("plugin update file: ".$pluginUpdateFile);
+
+
+if(isset($_POST['updatePlugin']))
+{
+	$updateResult = updatePluginFromGitHub($gitURL, $branch="master", $pluginName);
+
+	echo $updateResult."<br/> \n";
+}
 
 if(isset($_POST['submit']))
 {
@@ -37,18 +57,18 @@ if(isset($_POST['submit']))
 }
 
 	
-	$ENABLED = urldecode(ReadSettingFromFile("ENABLED",$pluginName));
-	$SEPARATOR = urldecode(ReadSettingFromFile("SEPARATOR",$pluginName));
-	$USER = urldecode(ReadSettingFromFile("USER",$pluginName));
-	$OAUTH_ACCESS_TOKEN = urldecode(ReadSettingFromFile("oauth_access_token",$pluginName));
-	$OAUTH_ACCESS_TOKEN_SECRET = urldecode(ReadSettingFromFile("oauth_access_token_secret",$pluginName));
-	$CONSUMER_KEY = urldecode(ReadSettingFromFile("consumer_key",$pluginName));
-	$CONSUMER_SECRET = urldecode(ReadSettingFromFile("consumer_secret",$pluginName));
+	$ENABLED = $pluginSettings['ENABLED'];
+	$SEPARATOR = $pluginSettings['SEPARATOR'];
+	$USER = $pluginSettings['USER'];
+	$OAUTH_ACCESS_TOKEN = $pluginSettings['oauth_access_token'];
+	$OAUTH_ACCESS_TOKEN_SECRET = $pluginSettings['oauth_access_token_secret'];
+	$CONSUMER_KEY = $pluginSettings['consumer_key'];
+	$CONSUMER_SECRET =$pluginSettings['consumer_secret'];
 	
-	$TWITTER_LAST_INDEX = ReadSettingFromFile("TWITTER_LAST",$pluginName);
+	$TWITTER_LAST_INDEX = $pluginSettings['TWITTER_LAST'];
 	
 	
-	$LAST_READ = urldecode(ReadSettingFromFile("LAST_READ",$pluginName));
+	$LAST_READ = $pluginSettings['LAST_READ'];
 
 	if($SEPARATOR == "") {
 		$SEPARATOR="|";
@@ -158,7 +178,13 @@ if($DEBUG) {
 ?>
 <p/>
 <input id="submit_button" name="submit" type="submit" class="buttons" value="Save Config">
-
+<?
+ if(file_exists($pluginUpdateFile))
+ {
+ 	//echo "updating plugin included";
+	include $pluginUpdateFile;
+}
+?>
 </form>
 
 
