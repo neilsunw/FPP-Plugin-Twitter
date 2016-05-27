@@ -130,28 +130,28 @@ if($DEBUG) {
 	
 	echo "<p/> \n";
 	
-	echo "OAUTH Access Token: \n";
+	echo "Consumer Key (API Key): \n";
+	
+	echo "<input type=\"text\" name=\"consumer_key\" size=\"64\" value=\"".$CONSUMER_KEY."\"> \n";
+	echo "<p/> \n";
+	
+	echo "Consumer Secret (API Secret): \n";
+	
+	echo "<input type=\"text\" name=\"consumer_secret\" size=\"64\" value=\"".$CONSUMER_SECRET."\"> \n";
+
+
+	echo "<p/> \n";
+	
+	echo "Access Token: \n";
 	
 	echo "<input type=\"text\" name=\"oauth_access_token\" size=\"64\" value=\"".$OAUTH_ACCESS_TOKEN."\"> \n";
 	
 	
 	echo "<p/> \n";
 	
-	echo "OAUTH Access Token Secret: \n";
+	echo "Access Token Secret: \n";
 	
 	echo "<input type=\"text\" name=\"oauth_access_token_secret\" size=\"64\" value=\"".$OAUTH_ACCESS_TOKEN_SECRET."\"> \n";
-	
-	
-	echo "<p/> \n";
-	
-	echo "Consumer Key: \n";
-	
-	echo "<input type=\"text\" name=\"consumer_key\" size=\"64\" value=\"".$CONSUMER_KEY."\"> \n";
-	echo "<p/> \n";
-	
-	echo "Consumer Secret: \n";
-	
-	echo "<input type=\"text\" name=\"consumer_secret\" size=\"64\" value=\"".$CONSUMER_SECRET."\"> \n";
 	
 	
 
@@ -162,7 +162,7 @@ if($DEBUG) {
 </form>
 
 
-<p>To report a bug, please file it against the sms Control plugin project on Git: https://github.com/LightsOnHudson/FPP-Plugin-SportsTicker
+<p>To report a bug, please file it against the Twtter plugin project on Git: https://github.com/LightsOnHudson/FPP-Plugin-Twitter
 
 </fieldset>
 </div>
