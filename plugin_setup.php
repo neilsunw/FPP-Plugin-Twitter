@@ -39,7 +39,7 @@ if(isset($_POST['submit']))
 //	echo "Writring config fie <br/> \n";
 	
 	
-	WriteSettingToFile("ENABLED",urlencode($_POST["ENABLED"]),$pluginName);
+//	WriteSettingToFile("ENABLED",urlencode($_POST["ENABLED"]),$pluginName);
 	WriteSettingToFile("SEPARATOR",urlencode($_POST["SEPARATOR"]),$pluginName);
 	WriteSettingToFile("USER",urlencode($_POST["USER"]),$pluginName);
 	WriteSettingToFile("oauth_access_token",urlencode($_POST["oauth_access_token"]),$pluginName);
@@ -57,7 +57,7 @@ if(isset($_POST['submit']))
 }
 
 	
-	$ENABLED = $pluginSettings['ENABLED'];
+	$ENABLED = urldecode($pluginSettings['ENABLED']);
 	$SEPARATOR = $pluginSettings['SEPARATOR'];
 	$USER = $pluginSettings['USER'];
 	$OAUTH_ACCESS_TOKEN = $pluginSettings['oauth_access_token'];
@@ -120,12 +120,12 @@ $reboot=0;
 
 echo "ENABLE PLUGIN: ";
 
-if($ENABLED== 1 || $ENABLED == "on") {
-		echo "<input type=\"checkbox\" checked name=\"ENABLED\"> \n";
-//PrintSettingCheckbox("Radio Station", "ENABLED", $restart = 0, $reboot = 0, "ON", "OFF", $pluginName = $pluginName, $callbackName = "");
-	} else {
-		echo "<input type=\"checkbox\"  name=\"ENABLED\"> \n";
-}
+//if($ENABLED== 1 || $ENABLED == "on") {
+//		echo "<input type=\"checkbox\" checked name=\"ENABLED\"> \n";
+PrintSettingCheckbox("Twitter", "ENABLED", $restart = 0, $reboot = 0, "ON", "OFF", $pluginName = $pluginName, $callbackName = "");
+//	} else {
+	//	echo "<input type=\"checkbox\"  name=\"ENABLED\"> \n";
+//}
 
 echo "<p/> \n";
 
