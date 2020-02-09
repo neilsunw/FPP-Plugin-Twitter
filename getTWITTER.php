@@ -5,7 +5,7 @@
 $pluginName ="Twitter";
 $myPid = getmypid();
 
-$messageQueue_Plugin = "MessageQueue";
+$messageQueue_Plugin = "FPP-Plugin-MessageQueue"; // NBP 2/2/2020 update to match plugin directory name
 $MESSAGE_QUEUE_PLUGIN_ENABLED=false;
 
 $DEBUG=false;
@@ -151,11 +151,11 @@ $twitter = new TwitterAPIExchange($twitterSettings);
 $string = json_decode($twitter->setGetfield($getfield)
 ->buildOauth($url, $requestMethod)
 ->performRequest(),$assoc = TRUE);
-if($string["errors"][0]["message"] != "") {
-	LogEntry("Twitter Error:Sorry, there was a problem. Twitter returned the following error message:".$string[errors][0]["message"]);
-	lockHelper::unlock();
-	exit(0);
-}
+//if($string["errors"][0]["message"] != "") { // NBP -- PHP notice, undefined index: errors (?) -- hack comment out to avoid
+//  LogEntry("Twitter Error:Sorry, there was a problem. Twitter returned the following error message:".$string[errors][0]["message"]);
+//  lockHelper::unlock();
+//  exit(0);
+//}
 //print_r($string);
 
 
@@ -219,29 +219,28 @@ for($tweetIndex=0;$tweetIndex<=$tweetCount-1;$tweetIndex++) {
 }
 
     //get the max ID and writ it as last read! :)
-    
-//in the case of timeline, it's the FIRST returned index. as they are returned in reverse/latest order
 
-switch ($API_TYPE) {
-	
-	
-	case "TWEETS":
-		//$lastRead = $string['search_metadata']['max_id_str'];
-		$lastRead = $string[0]['id_str'];
-		break;
-		
-	case "TIMELINE":
-		$lastRead = $string[0]['id_str'];
-		break;
-		
-}
-   //update the last index if the count > 0
-   if($tweetCount>0 ) {
-		WriteSettingToFile("TWITTER_LAST",$lastRead,$pluginName);
-		logEntry("Writing Twitter last index: ".$lastRead);
-   }
-   
-   // echo "Last read: ".$lastRead."\n";
+    //in the case of timeline, it's the FIRST returned index. as they are returned in reverse/latest order
+
+    //update the last index if the count > 0
+    if($tweetCount>0 ) {
+        switch ($API_TYPE) { // NBP 2/2/2020 -- moved switch inside if($tweetCount>0) -- fix PHP notice
+
+            case "TWEETS":
+                //$lastRead = $string['search_metadata']['max_id_str'];
+                $lastRead = $string[0]['id_str'];
+                break;
+
+            case "TIMELINE":
+                $lastRead = $string[0]['id_str'];
+                break;
+
+        }
+        WriteSettingToFile("TWITTER_LAST",$lastRead,$pluginName);
+        logEntry("Writing Twitter last index: ".$lastRead);
+    }
+    
+    // echo "Last read: ".$lastRead."\n";
   
     lockHelper::unlock();
 ?>
